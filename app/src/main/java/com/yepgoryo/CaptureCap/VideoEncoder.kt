@@ -213,8 +213,15 @@ class VideoEncoder(private val context: Context, customWidth: Int, customHeight:
 
             if (drawOverlay || useCropArea) {
                 mediaCodecSurface = MediaCodec.createByCodecName(this.codecName)
+
+                val useFormat = if (useCustomFormat) {
+                    customFormat
+                } else {
+                    MediaFormat.MIMETYPE_VIDEO_AVC
+                }
+
                 mediaCodecDecoder =
-                    MediaCodec.createDecoderByType(MediaFormat.MIMETYPE_VIDEO_AVC)
+                    MediaCodec.createDecoderByType(useFormat)
             }
 
             if (this.mCallback != null) {
