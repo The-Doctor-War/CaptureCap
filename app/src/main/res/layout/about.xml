@@ -42,7 +42,7 @@
                     android:id="@+id/appicon"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
-                    android:contentDescription="@string/record_start"
+                    android:contentDescription="@string/description_about_app_icon"
                     android:background="@drawable/ic_launcher_splash" />
 
                 <LinearLayout

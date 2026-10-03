@@ -135,6 +135,7 @@
 
                             <SeekBar
                                 android:id="@+id/audio_volume_seek"
+                                android:contentDescription="@string/audio_volume_audio"
                                 android:layout_width="0dp"
                                 android:layout_weight="8"
                                 android:layout_height="wrap_content"
@@ -199,6 +200,7 @@
 
                             <SeekBar
                                 android:id="@+id/microphone_volume_seek"
+                                android:contentDescription="@string/audio_volume_microphone"
                                 android:layout_width="0dp"
                                 android:layout_weight="8"
                                 android:layout_height="wrap_content"
@@ -262,6 +264,7 @@
 
                             <SeekBar
                                 android:id="@+id/phonecall_volume_seek"
+                                android:contentDescription="@string/audio_volume_phonecall"
                                 android:layout_width="0dp"
                                 android:layout_weight="8"
                                 android:layout_height="wrap_content"
@@ -306,6 +309,7 @@
 
                 <com.yepgoryo.CaptureCap.PresetButtonChoose
                     android:id="@+id/audio_volume_preset"
+                    android:contentDescription="@string/description_sound_preset_select"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="match_parent"
@@ -318,6 +322,7 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:background="@drawable/bg_setting_rounded_button_checked"
+                        android:contentDescription="@string/description_sound_preset_select_num_1"
                         android:textSize="13sp"
                         android:layout_centerHorizontal="true"
                         android:textOff="1"
@@ -330,6 +335,7 @@
                         android:layout_height="45dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/bg_setting_rounded_button_checked"
+                        android:contentDescription="@string/description_sound_preset_select_num_2"
                         android:textSize="13sp"
                         android:layout_centerHorizontal="true"
                         android:textOff="2"
@@ -342,6 +348,7 @@
                         android:layout_height="45dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/bg_setting_rounded_button_checked"
+                        android:contentDescription="@string/description_sound_preset_select_num_3"
                         android:textSize="13sp"
                         android:layout_centerHorizontal="true"
                         android:textOff="3"
@@ -354,6 +361,7 @@
                         android:layout_height="45dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/bg_setting_rounded_button_checked"
+                        android:contentDescription="@string/description_sound_preset_select_num_4"
                         android:textSize="13sp"
                         android:layout_centerHorizontal="true"
                         android:textOff="4"

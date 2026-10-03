@@ -146,7 +146,7 @@
     <string name="floating_controls_opacity_description">Set floating controls opacity</string>
     <string name="floating_controls_reduce_to_dot">Floating controls panel dot</string>
     <string name="floating_controls_reduce_to_dot_description">Reduce panel to a dot when collapsed</string>
-    <string name="floating_controls_description_handle">Floating controls handle</string>
+    <string name="floating_controls_description_handle">Floating controls handle. Click to collapse or show the panel.</string>
     <string name="screen_orientation">Screen orientation</string>
     <string name="screen_orientation_description">Force screen orientation</string>
     <array name="screen_orientation_preferences">
@@ -326,4 +326,21 @@
     <string name="overlay_color_picker_hex">Color Hex</string>
     <string name="overlay_text_settings_enter">Enter text</string>
     <string name="overlay_text_settings_center">Center text</string>
+
+    <!-- Content descriptions -->
+    <string name="description_record_status_camera">An old-fashioned rolling camera</string>
+    <string name="description_record_status_camera_microphone">An old-fashioned rolling camera with a microphone on a stick behind it</string>
+    <string name="description_record_status_camera_headphones_microphone">An old-fashioned rolling camera with a microphone on a stick behind it, and headphones hanging on a wire from it</string>
+    <string name="description_record_status_camera_headphones">An old-fashioned rolling camera with headphones hanging on a wire from it</string>
+    <string name="description_record_status_nocamera_headphones_microphone">An old-fashioned tape dictaphone with headphones and a microphone lying around, attached to it</string>
+    <string name="description_record_status_nocamera_headphones">An old-fashioned tape dictaphone with headphones lying around, attached to it</string>
+    <string name="description_record_status_nocamera_microphone">An old-fashioned tape dictaphone with a microphone lying around, attached to it</string>
+    <string name="description_record_status_camera_reels">Two camera reels</string>
+    <string name="description_record_status_dictaphone_reels">Two dictaphone tape reels</string>
+    <string name="description_sound_preset_select">Select the audio volume preset</string>
+    <string name="description_sound_preset_select_num_1">Select volume preset 1</string>
+    <string name="description_sound_preset_select_num_2">Select volume preset 2</string>
+    <string name="description_sound_preset_select_num_3">Select volume preset 3</string>
+    <string name="description_sound_preset_select_num_4">Select volume preset 4</string>
+    <string name="description_about_app_icon">CaptureCap app icon</string>
 </resources>

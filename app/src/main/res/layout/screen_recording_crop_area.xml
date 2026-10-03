@@ -55,6 +55,7 @@
 
                     <EditText
                         android:id="@+id/pixelwidthvalue"
+                        android:contentDescription="@string/crop_screen_width"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -79,6 +80,7 @@
 
                     <EditText
                         android:id="@+id/pixelheightvalue"
+                        android:contentDescription="@string/crop_screen_height"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -110,6 +112,7 @@
 
                     <EditText
                         android:id="@+id/pixelxvalue"
+                        android:contentDescription="X"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -134,6 +137,7 @@
 
                     <EditText
                         android:id="@+id/pixelyvalue"
+                        android:contentDescription="Y"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"

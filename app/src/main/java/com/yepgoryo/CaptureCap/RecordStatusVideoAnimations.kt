@@ -82,6 +82,45 @@ class RecordStatusVideoAnimations(
     }
 
     private fun playerSetAnimation(item: MediaItem, repeat: Boolean, autoplay: Boolean = false) {
+        when (item) {
+            recordingInProgressVideoMicAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_camera_headphones_microphone)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera_headphones_microphone)
+            }
+            recordingInProgressVideoNoMicAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_camera_headphones)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera_headphones)
+            }
+            recordingInProgressVideoMicNoAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_camera_microphone)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera_microphone)
+            }
+            recordingInProgressVideoNoMicNoAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_camera)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera)
+            }
+            recordingInProgressAudioMicAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_nocamera_headphones_microphone)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_nocamera_headphones_microphone)
+            }
+            recordingInProgressAudioNoMicAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_nocamera_headphones)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_nocamera_headphones)
+            }
+            recordingInProgressAudioMicNoAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_nocamera_microphone)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_nocamera_microphone)
+            }
+            recordingFinishedVideo -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_camera_reels)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera_reels)
+            }
+            recordingFinishedAudio -> {
+                playerUse.contentDescription = context.getString(R.string.description_record_status_dictaphone_reels)
+                playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_dictaphone_reels)
+            }
+        }
+
         isLooping.set(false)
         if (disableAnimations) {
             return
@@ -457,8 +496,14 @@ class RecordStatusVideoAnimations(
 
                 useAnimate.set(false)
                 if (recordOnlyAudio) {
+                    playerUse.contentDescription = context.getString(R.string.description_record_status_dictaphone_reels)
+                    playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_dictaphone_reels)
+
                     playerPreviewUse.setImageDrawable(recordingFinishedAudioStaticPreview)
                 } else {
+                    playerUse.contentDescription = context.getString(R.string.description_record_status_camera_reels)
+                    playerPreviewUse.contentDescription = context.getString(R.string.description_record_status_camera_reels)
+
                     playerPreviewUse.setImageDrawable(recordingFinishedVideoStaticPreview)
                 }
                 playerUse.visibility = View.INVISIBLE

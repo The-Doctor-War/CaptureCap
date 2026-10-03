@@ -43,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:contentDescription="@string/audio_volume_audio"
                     android:max="100" />
 
                 <TextView
@@ -93,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:contentDescription="@string/audio_volume_microphone"
                     android:max="100" />
 
                 <TextView
@@ -143,6 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:contentDescription="@string/audio_volume_phonecall"
                     android:max="100" />
 
                 <TextView

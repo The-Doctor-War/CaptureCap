@@ -242,6 +242,7 @@
                                     android:id="@+id/record_option_screen"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:contentDescription="@string/setting_record_option_screen"
                                     android:layout_marginBottom="8dp"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp">
@@ -289,6 +290,7 @@
                                     android:id="@+id/record_option_audio"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:contentDescription="@string/setting_record_option_audio"
                                     android:layout_marginBottom="8dp"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp">
@@ -336,6 +338,7 @@
                                     android:id="@+id/record_option_microphone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:contentDescription="@string/setting_record_option_microphone"
                                     android:layout_marginBottom="8dp"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp">
@@ -384,6 +387,7 @@
                                     android:id="@+id/record_option_phonecall"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:contentDescription="@string/setting_record_option_phonecall"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp">
 
