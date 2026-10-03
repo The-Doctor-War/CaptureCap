@@ -2082,7 +2082,7 @@ class ScreenRecorder : Service() {
         this.finishedFileIntent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         this.finishedFileIntent!!.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && this.finishedFile != null) {
-            this.finishedFileIntent!!.setDataAndType(FileProvider.getUriForFile(applicationContext, MainActivity.appName + ".DocProvider", this.finishedFile), this.finishedDocumentMime)
+            this.finishedFileIntent!!.setDataAndType(FileProvider.getUriForFile(applicationContext, MainActivity.appName + ".DocProvider", this.finishedFile!!), this.finishedDocumentMime)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && this.finishedFileDocument != null) {
             this.finishedFileIntent!!.setDataAndType(this.finishedFileDocument, this.finishedDocumentMime)
         }

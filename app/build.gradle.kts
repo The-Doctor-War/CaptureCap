@@ -1,5 +1,6 @@
 import java.net.URI
 import java.security.MessageDigest
+import com.android.build.api.dsl.ApplicationExtension
 
 plugins {
     alias(libs.plugins.android.application)
@@ -75,16 +76,20 @@ val downloadScrcpyServer = tasks.register<DownloadAndCheckSha256Task>("downloadS
     outputDir.set(scrcpyServerDownloadDir)
 }
 
-android {
+kotlin {
+    jvmToolchain(11)
+}
+
+extensions.configure<ApplicationExtension> {
     namespace = "com.yepgoryo.CaptureCap"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
-
+    ndkVersion = "27.0.12077973"
     defaultConfig {
         applicationId = "com.yepgoryo.CaptureCap"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 44
         versionName = "3.9.8.3"
 
@@ -100,7 +105,7 @@ android {
                 cppFlags += ""
                 arguments += listOf("-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
                 "-DANDROID_TOOLCHAIN=clang",
-                "-DNDK_ROOT=${android.ndkDirectory.absolutePath}")
+                "-DNDK_ROOT=${androidComponents.sdkComponents.ndkDirectory.get().asFile.path}")
             }
         }
     }
@@ -118,9 +123,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         compose = true
         aidl = true
@@ -136,7 +138,11 @@ android {
             version = "3.22.1"
         }
     }
-    ndkVersion = "27.0.12077973"
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 androidComponents {
