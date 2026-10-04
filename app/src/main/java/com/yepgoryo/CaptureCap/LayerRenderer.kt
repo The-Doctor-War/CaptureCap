@@ -16,7 +16,9 @@ import android.view.Surface
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.nio.FloatBuffer
 import java.nio.IntBuffer
+import java.nio.ShortBuffer
 
 class LayerRenderer(
     private val eglContext: EGLContext,
@@ -149,6 +151,21 @@ class LayerRenderer(
 
     private lateinit var outputEglSurface: EGLSurface
 
+    val vertices = floatArrayOf(
+        -1f, -1f, 0f, 1f,
+        1f, -1f, 1f, 1f,
+        -1f, 1f, 0f, 0f,
+        1f, 1f, 1f, 0f,
+    )
+
+    val indices = shortArrayOf(
+        0, 1, 2,
+        2, 1, 3,
+    )
+
+    private var vboId: Int = -1
+    private var iboId: Int = -1
+
     private var programOesBackground: Int
     private var programOverlay1: Int
     private var programOesFrontCamera: Int
@@ -185,7 +202,25 @@ class LayerRenderer(
         programOverlay2 = GlUtil.createProgram(TEXTURE_VERTEX_SHADER, TEXTURE_FRAGMENT_SHADER)
         programOverlayBuffer = GlUtil.createProgram(CROPPED_VERTEX_SHADER, CROPPED_FRAGMENT_SHADER)
 
-        QuadBuffers.create()
+        val buffers = IntArray(2)
+        GLES20.glGenBuffers(buffers.size, buffers, 0)
+        vboId = buffers[0]
+        iboId = buffers[1]
+
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vboId)
+        val vertexBuf = FloatBuffer.allocate(vertices.size)
+        vertexBuf.put(vertices)
+        vertexBuf.flip()
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, vertexBuf.capacity() * Float.SIZE_BYTES, vertexBuf, GLES20.GL_STATIC_DRAW)
+
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, iboId)
+        val indexBuf = ShortBuffer.allocate(indices.size)
+        indexBuf.put(indices)
+        indexBuf.flip()
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, indexBuf.capacity() * Short.SIZE_BYTES, indexBuf, GLES20.GL_STATIC_DRAW)
+
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0)
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0)
 
         oesTexBackground = backgroundSurfaceTextureId
         if (frontCameraSurfaceTextureId != null) {
@@ -295,6 +330,22 @@ class LayerRenderer(
         GLES20.glVertexAttribPointer(1, 2, GLES20.GL_FLOAT, false, stride, 2 * 4)
     }
 
+    fun drawIndexed() {
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vboId)
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, iboId)
+
+        val stride = 4 * 4
+        GLES20.glEnableVertexAttribArray(0)
+        GLES20.glVertexAttribPointer(0, 2, GLES20.GL_FLOAT, false, stride, 0)
+        GLES20.glEnableVertexAttribArray(1)
+        GLES20.glVertexAttribPointer(1, 2, GLES20.GL_FLOAT, false, stride, 2 * 4)
+
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, 6, GLES20.GL_UNSIGNED_SHORT, 0)
+
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0)
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0)
+    }
+
     fun draw() {
         if (useCropArea) {
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fullFrameBuffer[0])
@@ -313,7 +364,7 @@ class LayerRenderer(
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, oesTexBackground)
         GLES20.glUniform1i(uLocsOesBg, 0)
-        QuadBuffers.drawIndexed()
+        drawIndexed()
 
         if (useOverlay) {
             if (overlayBitmap1 != null) {
@@ -325,7 +376,7 @@ class LayerRenderer(
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texOverlay1)
                 GLES20.glUniform1i(uLocsOverlay1, 1)
 
-                QuadBuffers.drawIndexed()
+                drawIndexed()
             }
 
             if (frontCameraSurfaceTexture != null) {
@@ -407,7 +458,7 @@ class LayerRenderer(
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texOverlay2)
                 GLES20.glUniform1i(uLocsOverlay2, 3)
 
-                QuadBuffers.drawIndexed()
+                drawIndexed()
             }
         }
 
@@ -443,7 +494,7 @@ class LayerRenderer(
             GLES20.glUniform2f(uCenterPosOverlayBuffer, centerXNdc, centerYNdc)
             GLES20.glUniform1i(uLocsOverlayBuffer, 4)
 
-            QuadBuffers.drawIndexed()
+            drawIndexed()
         }
 
         eglCore.swapBuffers()
@@ -459,7 +510,7 @@ class LayerRenderer(
         st.getTransformMatrix(matrix)
 
         val texCoords = FloatArray(8)
-        QuadBuffers.vertices.let { quad ->
+        vertices.let { quad ->
             for (i in 0 until 4) {
                 val s = quad[i * 4 + 2]
                 val t = quad[i * 4 + 3]

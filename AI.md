@@ -12,7 +12,6 @@ GlUtil
 HardwareOrientationSensor
 LayerRenderer
 OpacitySeekBar
-QuadBuffers
 RecordingCropBar
 RecordingCropScreen
 RecordingTrimmer
